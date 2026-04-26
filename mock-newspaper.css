@@ -1,0 +1,828 @@
+/* Shared styles for mock newspaper pages — sociallyDistored L1-3 disinfo links. */
+
+:root {
+  --paper: #fbfbf7;
+  --ink: #121212;
+  --muted: #5a5a5a;
+  --rule: #cfcfcf;
+  --section: #af1e2d;
+  --link: #326891;
+  --serif-display: "Playfair Display", "Times New Roman", Georgia, serif;
+  --serif-body: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 24px 64px;
+}
+
+/* ─── 3-column layout (vertical article + side rails) ─────────────────
+   Use <div class="page page-3col">. Inside, structure is:
+     <header class="masthead-wide"> ... </header>   ← full width
+     <div class="cols-3">
+       <aside class="rail rail-left"> ... </aside>
+       <section class="col-main"> central article HTML </section>
+       <aside class="rail rail-right"> ... </aside>
+     </div>
+     <aside class="related"> ... </aside>           ← full width
+     <footer class="site-foot"> ... </footer>       ← full width
+*/
+.page-3col {
+  max-width: 1100px;
+}
+.cols-3 {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) 220px;
+  gap: 28px;
+  margin-top: 18px;
+}
+@media (max-width: 980px) {
+  .cols-3 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .rail-left { order: 2; }
+  .col-main { order: 1; }
+  .rail-right { order: 3; }
+}
+.col-main {
+  min-width: 0;
+}
+.rail {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+}
+.rail h4 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-top: 2px solid var(--ink);
+  padding-top: 8px;
+  margin: 0 0 10px;
+}
+.rail ul {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+.rail li {
+  border-top: 1px solid var(--rule);
+  padding: 7px 0;
+}
+.rail li:first-child {
+  border-top: none;
+  padding-top: 2px;
+}
+.rail a {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--serif-body);
+  font-size: 13px;
+  line-height: 1.3;
+  display: block;
+}
+.rail a:hover { text-decoration: underline; }
+.rail .kicker {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--section);
+  margin-bottom: 3px;
+}
+.rail .blurb {
+  font-family: var(--serif-body);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 4px 0 0;
+  line-height: 1.4;
+}
+.rail .feel-good .kicker {
+  color: #2a8762;
+}
+
+/* ─── Wide homepage-style layout ──────────────────────────────────────
+   Use <article class="page page-wide">. Inside:
+     <header class="masthead-wide"> ... </header>
+     <section class="feature"> central editable story </section>
+     <div class="story-row"> 4 secondary story cards </div>
+     <div class="story-row"> 4 more secondary story cards </div>
+     <footer class="site-foot"> ... </footer>
+*/
+.page-wide {
+  max-width: 1200px;
+}
+.page-wide .feature {
+  margin-top: 18px;
+}
+.page-wide .feature .headline {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.page-wide .feature .subhead {
+  font-size: 20px;
+}
+.page-wide .feature figure.hero img {
+  max-width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 540px) {
+  .page-wide .feature figure.hero img { max-width: 100%; }
+}
+
+.story-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+}
+@media (max-width: 980px) {
+  .story-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .story-row { grid-template-columns: 1fr; }
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+}
+.story-card .card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #ddd;
+  display: block;
+  margin-bottom: 10px;
+}
+.story-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.story-card .kicker {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--section);
+  margin-bottom: 4px;
+}
+.story-card .feel-good .kicker,
+.story-card.feel-good .kicker {
+  color: #2a8762;
+}
+.story-card .card-headline {
+  font-family: var(--serif-display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.22;
+  margin: 0 0 6px;
+}
+.story-card .card-headline a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.story-card .card-headline a:hover { text-decoration: underline; }
+.story-card .card-dek {
+  font-family: var(--serif-body);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0;
+}
+.story-card .card-byline {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ─── Masthead theme variants ─────────────────────────────────────────
+   Apply to <article class="page ... theme-x">. Affects masthead typography
+   (and, for theme-noir, the entire page palette).
+*/
+
+/* Classic display serif — large, bold, slight tracking. Default look. */
+.theme-classic-serif .paper-name {
+  font-family: "Playfair Display", "Times New Roman", Georgia, serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Italic display serif — elegant, magazine-y. */
+.theme-italic-serif .paper-name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+/* Broadsheet — Times New Roman, ALL CAPS, wide tracking, like an old paper. */
+.theme-broadsheet .paper-name {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 36px;
+}
+.theme-broadsheet .tagline {
+  letter-spacing: 4px;
+}
+
+/* Condensed display — narrow weight, all caps, urban feel. */
+.theme-condensed .paper-name {
+  font-family: "Helvetica Neue Condensed", "Arial Narrow", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  font-stretch: condensed;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 50px;
+}
+
+/* Modern sans — Helvetica/Arial Black, clean and contemporary. */
+.theme-modern-sans .paper-name {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  font-size: 42px;
+}
+
+/* Noir — dark inverted palette + heavy sans masthead. */
+/* Pull the dark background up to the full viewport on noir pages. */
+html:has(.theme-noir),
+body:has(.theme-noir) {
+  background: #0c0c0c;
+  color: #ece9df;
+}
+.theme-noir {
+  background: #0c0c0c;
+  color: #ece9df;
+}
+.theme-noir .masthead {
+  border-bottom-color: #ece9df;
+}
+.theme-noir .masthead .paper-name {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  color: #ece9df;
+}
+.theme-noir .masthead .tagline,
+.theme-noir .masthead .meta-row,
+.theme-noir .masthead .meta-row a {
+  color: #a8a59a;
+}
+.theme-noir .masthead .meta-row {
+  border-top-color: #2a2a2a;
+}
+.theme-noir .section-label {
+  color: #ff6b6b;
+}
+.theme-noir h1.headline,
+.theme-noir h2.subsection {
+  color: #ece9df;
+}
+.theme-noir p.subhead {
+  color: #c5c1b3;
+}
+.theme-noir .body p,
+.theme-noir blockquote.pull-quote,
+.theme-noir blockquote.pull-quote cite {
+  color: #ece9df;
+}
+.theme-noir blockquote.pull-quote {
+  border-color: #ece9df;
+}
+.theme-noir .byline {
+  border-color: #2a2a2a;
+}
+.theme-noir .byline .author { color: #ece9df; }
+.theme-noir .byline .author small,
+.theme-noir .byline .date,
+.theme-noir .byline .share { color: #a8a59a; }
+.theme-noir figure.hero figcaption,
+.theme-noir figure.hero figcaption .credit { color: #a8a59a; }
+.theme-noir .rail h4 {
+  color: #ece9df;
+  border-top-color: #ece9df;
+}
+.theme-noir .rail li { border-top-color: #2a2a2a; }
+.theme-noir .rail a { color: #ece9df; }
+.theme-noir .rail .blurb { color: #a8a59a; }
+.theme-noir .rail .kicker,
+.theme-noir aside.related .kicker,
+.theme-noir .story-card .kicker {
+  color: #ff6b6b;
+}
+.theme-noir .rail .feel-good .kicker,
+.theme-noir .story-card.feel-good .kicker {
+  color: #6dd1a3;
+}
+.theme-noir aside.related,
+.theme-noir .story-row {
+  border-top-color: #ece9df;
+}
+.theme-noir aside.related h3 { color: #ece9df; }
+.theme-noir aside.related li { border-top-color: #2a2a2a; }
+.theme-noir aside.related a { color: #ece9df; }
+.theme-noir .story-card .card-headline a { color: #ece9df; }
+.theme-noir .story-card .card-dek,
+.theme-noir .story-card .card-byline { color: #a8a59a; }
+.theme-noir footer.site-foot {
+  border-top-color: #ece9df;
+  color: #a8a59a;
+}
+.theme-noir footer.site-foot a { color: #a8a59a; }
+
+/* ─── Per-paper accent palettes ───────────────────────────────────────
+   Stack with a theme-* class. Overrides the section/accent colors and
+   adds paper-specific decorative elements (top stripe, masthead colors).
+*/
+
+/* San Francisco Gazette — Bay Area palette
+   Pacific blue masthead + Golden Gate orange accents on a warm cream paper. */
+.paper-sf {
+  --paper: #fdf6ec;
+  --section: #c8472b;
+  background: var(--paper);
+}
+.paper-sf .masthead {
+  position: relative;
+  padding-top: 24px;
+}
+/* Solid red line above the masthead, plus a thinner red rule below. */
+.paper-sf .masthead::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -24px;
+  right: -24px;
+  height: 6px;
+  background: #c8472b;
+}
+.paper-sf .paper-name {
+  color: #0d2e4a;
+}
+.paper-sf .tagline {
+  color: #c8472b;
+  font-weight: 700;
+}
+.paper-sf .masthead {
+  border-bottom: 2px solid #c8472b;
+}
+.paper-sf .masthead .meta-row {
+  border-top-color: #d6cfb6;
+}
+.paper-sf .section-label {
+  color: #c8472b;
+}
+.paper-sf .rail h4 {
+  color: #0d2e4a;
+  border-top-color: #0d2e4a;
+}
+.paper-sf .rail .kicker,
+.paper-sf aside.related .kicker,
+.paper-sf .story-card .kicker {
+  color: #c8472b;
+}
+.paper-sf aside.related,
+.paper-sf .story-row,
+.paper-sf footer.site-foot {
+  border-top-color: #0d2e4a;
+}
+.paper-sf aside.related h3 {
+  color: #0d2e4a;
+}
+.paper-sf .byline {
+  border-color: #d6cfb6;
+}
+.paper-sf blockquote.pull-quote {
+  border-color: #0d2e4a;
+}
+.paper-sf blockquote.pull-quote cite {
+  color: #1d6394;
+}
+.paper-sf h2.subsection {
+  color: #0d2e4a;
+}
+
+/* Toronto News Quarterly — thin blue line under the masthead. */
+.paper-toronto .masthead {
+  border-bottom: 1px solid #1d3f73;
+}
+
+/* Pacific Republic Times — deep ocean blue masthead with cool surf accents. */
+.paper-pacific {
+  --section: #2a8fb0;
+}
+.paper-pacific .masthead {
+  position: relative;
+  padding-top: 24px;
+  border-bottom: 2px solid #2a8fb0;
+}
+.paper-pacific .masthead::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -24px;
+  right: -24px;
+  height: 6px;
+  background: #0e3f5e;
+}
+.paper-pacific .paper-name { color: #0e3f5e; }
+.paper-pacific .tagline {
+  color: #2a8fb0;
+  font-weight: 700;
+}
+.paper-pacific .section-label { color: #2a8fb0; }
+.paper-pacific .rail h4 {
+  color: #0e3f5e;
+  border-top-color: #0e3f5e;
+}
+.paper-pacific .rail .kicker,
+.paper-pacific aside.related .kicker,
+.paper-pacific .story-card .kicker {
+  color: #2a8fb0;
+}
+.paper-pacific aside.related,
+.paper-pacific .story-row,
+.paper-pacific footer.site-foot {
+  border-top-color: #0e3f5e;
+}
+.paper-pacific aside.related h3 { color: #0e3f5e; }
+.paper-pacific blockquote.pull-quote { border-color: #0e3f5e; }
+.paper-pacific blockquote.pull-quote cite { color: #2a8fb0; }
+.paper-pacific h2.subsection { color: #0e3f5e; }
+
+/* The Atlantic Coast Herald — maritime burgundy masthead. */
+.paper-atlantic {
+  --section: #a13140;
+}
+.paper-atlantic .masthead {
+  position: relative;
+  padding-top: 24px;
+  border-bottom: 2px solid #a13140;
+}
+.paper-atlantic .masthead::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -24px;
+  right: -24px;
+  height: 6px;
+  background: #5e1620;
+}
+.paper-atlantic .paper-name { color: #5e1620; }
+.paper-atlantic .tagline {
+  color: #a13140;
+  font-weight: 700;
+}
+.paper-atlantic .section-label { color: #a13140; }
+.paper-atlantic .rail h4 {
+  color: #5e1620;
+  border-top-color: #5e1620;
+}
+.paper-atlantic .rail .kicker,
+.paper-atlantic aside.related .kicker,
+.paper-atlantic .story-card .kicker {
+  color: #a13140;
+}
+.paper-atlantic aside.related,
+.paper-atlantic .story-row,
+.paper-atlantic footer.site-foot {
+  border-top-color: #5e1620;
+}
+.paper-atlantic aside.related h3 { color: #5e1620; }
+.paper-atlantic blockquote.pull-quote { border-color: #5e1620; }
+.paper-atlantic blockquote.pull-quote cite { color: #a13140; }
+.paper-atlantic h2.subsection { color: #5e1620; }
+
+/* The Midwestern Tribune — heartland prairie green masthead. */
+.paper-midwest {
+  --section: #4a7d3f;
+}
+.paper-midwest .masthead {
+  position: relative;
+  padding-top: 24px;
+  border-bottom: 2px solid #4a7d3f;
+}
+.paper-midwest .masthead::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -24px;
+  right: -24px;
+  height: 6px;
+  background: #1f4d2a;
+}
+.paper-midwest .paper-name { color: #1f4d2a; }
+.paper-midwest .tagline {
+  color: #4a7d3f;
+  font-weight: 700;
+}
+.paper-midwest .section-label { color: #4a7d3f; }
+.paper-midwest .rail h4 {
+  color: #1f4d2a;
+  border-top-color: #1f4d2a;
+}
+.paper-midwest .rail .kicker,
+.paper-midwest aside.related .kicker,
+.paper-midwest .story-card .kicker {
+  color: #4a7d3f;
+}
+.paper-midwest aside.related,
+.paper-midwest .story-row,
+.paper-midwest footer.site-foot {
+  border-top-color: #1f4d2a;
+}
+.paper-midwest aside.related h3 { color: #1f4d2a; }
+.paper-midwest blockquote.pull-quote { border-color: #1f4d2a; }
+.paper-midwest blockquote.pull-quote cite { color: #4a7d3f; }
+.paper-midwest h2.subsection { color: #1f4d2a; }
+
+/* Masthead */
+.masthead {
+  text-align: center;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+}
+.masthead .paper-name {
+  font-family: var(--serif-display);
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: -0.5px;
+  margin: 0;
+  line-height: 1.05;
+}
+.masthead .tagline {
+  font-family: var(--sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+.masthead .meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 14px;
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+}
+.masthead .meta-row a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 6px;
+}
+
+/* Section label */
+.section-label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--section);
+  margin: 24px 0 12px;
+}
+
+/* Headline */
+h1.headline {
+  font-family: var(--serif-display);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1.1;
+  margin: 0 0 14px;
+  letter-spacing: -0.4px;
+}
+p.subhead {
+  font-family: var(--serif-body);
+  font-size: 18px;
+  line-height: 1.4;
+  color: #2c2c2c;
+  margin: 0 0 22px;
+  font-style: italic;
+}
+
+/* Byline */
+.byline {
+  font-family: var(--sans);
+  font-size: 13px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 0;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.byline .author { font-weight: 700; color: var(--ink); }
+.byline .author small { font-weight: 400; color: var(--muted); }
+.byline .date { color: var(--muted); font-size: 12px; }
+.byline .share { font-size: 11px; color: var(--muted); }
+.byline .share span { margin-left: 10px; }
+
+/* Hero figure */
+figure.hero { margin: 0 0 24px; }
+figure.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #ddd;
+}
+figure.hero figcaption {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+figure.hero figcaption .credit { color: #888; font-style: italic; }
+
+/* Body */
+.body p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+.body p:first-of-type::first-letter {
+  font-family: var(--serif-display);
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 0.9;
+  float: left;
+  padding: 4px 8px 0 0;
+}
+
+blockquote.pull-quote {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.3;
+  margin: 28px 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  text-align: left;
+}
+blockquote.pull-quote cite {
+  display: block;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+/* Inline subhead within article */
+h2.subsection {
+  font-family: var(--serif-display);
+  font-weight: 800;
+  font-size: 24px;
+  margin: 28px 0 12px;
+  line-height: 1.2;
+}
+
+/* Sidebar — related stories */
+aside.related {
+  margin-top: 40px;
+  padding: 18px 0;
+  border-top: 2px solid var(--ink);
+}
+aside.related h3 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+aside.related ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+}
+@media (max-width: 540px) {
+  aside.related ul { grid-template-columns: 1fr; }
+}
+aside.related li {
+  border-top: 1px solid var(--rule);
+  padding-top: 8px;
+}
+aside.related a {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--serif-body);
+  font-size: 15px;
+  line-height: 1.3;
+  display: block;
+}
+aside.related a:hover { text-decoration: underline; }
+aside.related .kicker {
+  font-family: var(--sans);
+  font-size: 10px;
+  color: var(--section);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* Footer */
+footer.site-foot {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+footer.site-foot a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 6px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 540px) {
+  .page { padding: 16px 16px 48px; }
+  .masthead .paper-name { font-size: 32px; }
+  h1.headline { font-size: 28px; }
+  p.subhead { font-size: 16px; }
+  .body p { font-size: 16px; }
+  .body p:first-of-type::first-letter { font-size: 44px; }
+  blockquote.pull-quote { font-size: 20px; }
+
+  /* Wide-layout feature headline/subhead override the generic mobile rule */
+  .page-wide .feature .headline { font-size: 30px; line-height: 1.15; }
+  .page-wide .feature .subhead { font-size: 16px; }
+
+  /* Stack masthead meta-row vertically on narrow phones */
+  .masthead .meta-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .masthead .meta-row nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2px;
+  }
+
+  /* Byline stacks rather than squeezing */
+  .byline { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .byline .share { display: none; }
+
+  /* Colored top stripes follow the smaller mobile page padding */
+  .paper-sf .masthead::before,
+  .paper-pacific .masthead::before,
+  .paper-atlantic .masthead::before,
+  .paper-midwest .masthead::before {
+    left: -16px;
+    right: -16px;
+  }
+}
