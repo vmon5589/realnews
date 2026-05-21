@@ -666,6 +666,16 @@ figure.hero img {
   display: block;
   background: #ddd;
 }
+/* Per-paper hero cap. width:100% lets it shrink on mobile; max-width caps it on desktop.
+   .paper-capitol uses .feature to beat the .page-wide .feature override above. */
+.paper-midwest figure.hero img,
+.paper-atlantic figure.hero img,
+.paper-sf figure.hero img,
+.paper-capitol .feature figure.hero img {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
 figure.hero figcaption {
   font-family: var(--sans);
   font-size: 12px;
